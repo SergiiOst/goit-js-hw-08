@@ -89,17 +89,17 @@ function createGallery(arr) {
 
 function handleClick(event) {
   event.preventDefault();
-  if (event.target === event.currentTarget) {
+  if (event.target.nodeName !== "IMG") {
     return;
   }
-  const currentImage = event.target.closest(".gallery-image");
-  const source = currentImage.dataset.source;
-  const image = images.find((image) => image.original === source);
+
+  const source = event.target.dataset.source;
+  const imageAlt = event.target.alt;
 
   const instance = basicLightbox.create(`
       <div class="modal">
-      <img src="${image.original}"
-      alt="${image.description}"
+      <img src="${source}"
+      alt="${imageAlt}"
     />
       </div>
   `);
